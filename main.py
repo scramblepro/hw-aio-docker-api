@@ -2,15 +2,15 @@ from aiohttp import web
 import json
 from datetime import datetime
 
-# Хранилище для объявлений
 ads = {}
 ad_id_counter = 1
+
+async def index(request):
+    return web.Response(text="API работает!")
 
 async def create_ad(request):
     global ad_id_counter
     data = await request.json()
-
-    # Проверка обязательных полей
     required_fields = ["title", "description", "owner"]
     if not all(field in data for field in required_fields):
         return web.json_response({"error": "Missing required fields"}, status=400)
@@ -42,6 +42,7 @@ async def delete_ad(request):
 
 app = web.Application()
 app.add_routes([
+    web.get("/", index),
     web.post("/ads", create_ad),
     web.get("/ads/{ad_id}", get_ad),
     web.delete("/ads/{ad_id}", delete_ad)

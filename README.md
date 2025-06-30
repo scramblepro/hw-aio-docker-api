@@ -32,7 +32,7 @@
 
 Запустите контейнер:
 
-docker run -d -p 8000:8000 hw-aio-docker-api
+docker run -p 8080:80 hw-aio-docker-api
 
 ## примеры эндпоинтов:
 
